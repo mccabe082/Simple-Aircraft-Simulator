@@ -1,0 +1,2 @@
+add_subdirectory(odeint_test)
+add_subdirectory(rapidxml_test)

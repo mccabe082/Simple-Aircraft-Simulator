@@ -1,4 +1,4 @@
-#include "interpolate/linear_lookup.h"
+#include "linear_lookup.h"
 #include <algorithm>
 #include <tuple>
 

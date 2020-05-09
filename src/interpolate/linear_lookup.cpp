@@ -10,7 +10,6 @@ namespace
 	std::pair<size_t, size_t> getUpperAndLowerInterpIndices(const interp::LinearLookup::DataTable& data, double x)
 	{
 		constexpr double UNUSED = 0.;
-		int iMax = data.size() - 1;
 
 		DataPoint _x{ x, UNUSED };
 		const auto& it = std::lower_bound(data.begin(), data.end() - 1, _x, [](const DataPoint& p, const DataPoint& _x) {return p.x <= _x.x; });

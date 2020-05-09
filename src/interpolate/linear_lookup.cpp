@@ -8,23 +8,6 @@ namespace
 {
 	const double UNUSED = 0.;
 
-	struct InterpValues
-	{
-		double lower;
-		double upper;
-
-		double upperWeight(double x)
-		{
-			return (x - lower) / (upper - lower);
-		}
-
-		double lowerWeight(double x)
-		{
-			return 1. - upperWeight(x);
-		}
-	};
-
-
 	std::pair<size_t, size_t> getUpperAndLowerInterpIndices(const interp::LinearLookup::DataTable& data, double x)
 	{
 		int iMax = data.size() - 1;
@@ -56,8 +39,15 @@ namespace interp
 	double LinearLookup::operator()(double x) const
 	{
 		const auto [iUpper, iLower] = getUpperAndLowerInterpIndices(data, x);
-		auto xPoints = InterpValues{ data[iLower].x, data[iUpper].x };
 
-		return  data[iLower].y * xPoints.lowerWeight(x) + data[iUpper].y * xPoints.upperWeight(x);
+		double x1 = data[iLower].x;
+		double x2 = data[iUpper].x;
+		double f1 = data[iLower].f;
+		double f2 = data[iUpper].f;
+
+		double upperWeight = (x - x1) / (x2 - x1);
+		double lowerWeight = 1. - upperWeight;
+
+		return f1 * lowerWeight + f2 * upperWeight;
 	}
 }

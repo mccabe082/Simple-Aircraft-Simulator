@@ -9,7 +9,7 @@ namespace interp
 	struct DataPoint
 	{
 		double x;
-		double y;
+		double f;
 	};
 
 	class LinearLookup

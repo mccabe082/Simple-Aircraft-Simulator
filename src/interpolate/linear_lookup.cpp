@@ -6,10 +6,10 @@ using namespace interp;
 
 namespace
 {
-	const double UNUSED = 0.;
 
 	std::pair<size_t, size_t> getUpperAndLowerInterpIndices(const interp::LinearLookup::DataTable& data, double x)
 	{
+		constexpr double UNUSED = 0.;
 		int iMax = data.size() - 1;
 
 		DataPoint _x{ x, UNUSED };

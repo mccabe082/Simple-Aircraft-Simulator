@@ -11,8 +11,8 @@ namespace
 	{
 		constexpr double UNUSED = 0.;
 
-		DataPoint _x{ x, UNUSED };
-		const auto& it = std::lower_bound(data.begin(), data.end() - 1, _x, [](const DataPoint& p, const DataPoint& _x) {return p.x <= _x.x; });
+		DataPoint1D _x{ x, UNUSED };
+		const auto& it = std::lower_bound(data.begin(), data.end() - 1, _x, [](const DataPoint1D& p, const DataPoint1D& _x) {return p.x <= _x.x; });
 		size_t iUpper = it - data.begin();
 		size_t iLower = iUpper == 0 ? 0 : iUpper - 1;
 
@@ -28,7 +28,7 @@ namespace interp
 	{
 		if (data.empty() || x > data.back().x)
 		{
-			data.push_back(DataPoint{ x,y });
+			data.push_back(DataPoint1D{ x,y });
 			return true;
 		}
 		

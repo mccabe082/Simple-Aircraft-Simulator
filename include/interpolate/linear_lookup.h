@@ -6,7 +6,7 @@
 
 namespace interp
 {
-	struct DataPoint
+	struct DataPoint1D
 	{
 		double x;
 		double y;
@@ -17,7 +17,7 @@ namespace interp
 	public:
 		bool addDataPoint(double x, double y);
 		double operator()(double x) const;
-		using DataTable = std::vector<DataPoint>;
+		using DataTable = std::vector<DataPoint1D>;
 	private:
 		DataTable data;
 	};

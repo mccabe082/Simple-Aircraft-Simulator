@@ -12,3 +12,9 @@ PRIVATE
   bilinear_lookup.cpp
   linear_lookup.cpp
 )
+
+target_compile_features(interpolate
+PRIVATE
+  cxx_std_17
+)
+

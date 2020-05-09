@@ -6,22 +6,17 @@
 
 namespace interp
 {
+	struct DataPoint
+	{
+		double x;
+		double y;
+	};
 
 	class LinearLookup
 	{
 	public:
-		LinearLookup()
-		{
-			// need to ensure monatonically increasing
-		}
-
+		bool addDataPoint(double x, double y);
 		double operator()(double x) const;
-
-		struct DataPoint
-		{
-			double x;
-			double y;
-		};
 		using DataTable = std::vector<DataPoint>;
 	private:
 		DataTable data;

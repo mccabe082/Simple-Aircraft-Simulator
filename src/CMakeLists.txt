@@ -1,1 +1,2 @@
 add_subdirectory(interpolate)
+add_subdirectory(interpolate_test)

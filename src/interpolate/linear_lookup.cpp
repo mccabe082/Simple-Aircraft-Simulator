@@ -42,8 +42,8 @@ namespace interp
 
 		double x1 = data[iLower].x;
 		double x2 = data[iUpper].x;
-		double f1 = data[iLower].f;
-		double f2 = data[iUpper].f;
+		double f1 = data[iLower].y;
+		double f2 = data[iUpper].y;
 
 		double upperWeight = (x - x1) / (x2 - x1);
 		double lowerWeight = 1. - upperWeight;

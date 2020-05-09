@@ -6,7 +6,6 @@ using namespace interp;
 
 namespace
 {
-
 	std::pair<size_t, size_t> getUpperAndLowerInterpIndices(const interp::LinearLookup::DataTable& data, double x)
 	{
 		constexpr double UNUSED = 0.;
@@ -24,14 +23,14 @@ namespace
 
 namespace interp
 {
-	bool LinearLookup::addDataPoint(double x, double y)
+	bool LinearLookup::addDataPoint(double x, double f)
 	{
 		if (data.empty() || x > data.back().x)
 		{
-			data.push_back(DataPoint1D{ x,y });
+			data.push_back(DataPoint1D{ x, f });
 			return true;
 		}
-		
+
 		return false; // reject points if independent variable is not strictly increasing
 	}
 
@@ -41,8 +40,8 @@ namespace interp
 
 		double x1 = data[iLower].x;
 		double x2 = data[iUpper].x;
-		double f1 = data[iLower].y;
-		double f2 = data[iUpper].y;
+		double f1 = data[iLower].f;
+		double f2 = data[iUpper].f;
 
 		double upperWeight = (x - x1) / (x2 - x1);
 		double lowerWeight = 1. - upperWeight;

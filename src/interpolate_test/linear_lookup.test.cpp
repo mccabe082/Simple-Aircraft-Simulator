@@ -4,7 +4,7 @@
 
 using namespace interp;
 
-TEST_CASE("Linear lookup tests", "[linear_lookup]")
+TEST_CASE("Simply linear lookup tests", "[linear_lookup]")
 {
 	LinearLookup straight_line;
 	straight_line.addDataPoint(0., 0.);
@@ -36,6 +36,20 @@ TEST_CASE("Linear lookup tests", "[linear_lookup]")
 	{
 		REQUIRE(straight_line(3.) == Approx(3.));
 		REQUIRE(straight_line(8.) == Approx(8.));
+	}
+
+	SECTION("Stress the system")
+	{
+		double xMin = -3.;
+		double xMax = 3.;
+		double xStep = 0.1;
+
+		double x = xMin;
+		while (x < xMax)
+		{
+			REQUIRE(straight_line(x) == Approx(1.));
+			x += xStep;
+		}
 	}
 
 }

@@ -7,11 +7,14 @@ PUBLIC
 
 target_sources(interpolate
 PRIVATE
-  ../../include/interpolate/lookup1D.h
+  ../../include/interpolate/lookup1d.h
+  ../../include/interpolate/lookup2d.h
   bilinear_lookup.cpp
   bilinear_lookup.h
   linear_lookup.cpp
   linear_lookup.h
+  nearest_neighbour2d.cpp
+  nearest_neighbour2d.h
 )
 
 target_compile_features(interpolate

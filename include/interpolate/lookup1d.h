@@ -7,7 +7,7 @@ namespace interp
 	struct DataPoint1D
 	{
 		double x;
-		double y;
+		double f;
 	};
     
     using DataTable1D = std::vector<DataPoint1D>;

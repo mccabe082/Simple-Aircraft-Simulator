@@ -9,8 +9,9 @@ namespace interp
 	public:
 		bool addDataPoint(double x, double y) override;
 		double operator()(double x) const override;
-		using DataTable = std::vector<DataPoint1D>;
+
+		std::pair<size_t, size_t> getUpperAndLowerInterpIndices(double x) const;
 	private:
-		DataTable data;
+		DataTable1D data;
 	};
 }

@@ -36,7 +36,7 @@ namespace interp
 
 	double LinearLookup::operator()(double x) const
 	{
-		const auto [iUpper, iLower] = getUpperAndLowerInterpIndices(x);
+		const auto [iUpper, iLower] = getUpperAndLowerInterpIndices(data, x);
 
 		double x1 = data[iLower].x;
 		double x2 = data[iUpper].x;

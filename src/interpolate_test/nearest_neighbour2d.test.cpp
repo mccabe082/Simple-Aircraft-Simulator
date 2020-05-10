@@ -19,14 +19,14 @@ TEST_CASE("nearest neighbour quatrent classification (not a unit test) test", "[
 	square_data.addDataPoint(double(Quadrant::TOP_RIGHT), 1.0, 1.0);
 	square_data.addDataPoint(double(Quadrant::TOP_LEFT), -1., 1.0);
 
-	SECTION("Try and classify the statespace correctly...")
+	SECTION("Try and classify the featurespace correctly...")
 	{
 		double xMin = -3.;
 		double xMax = 3.;
-		double xStep = 1.;
+		double xStep = 0.33;
 		double yMin = -3.;
 		double yMax = 3.;
-		double yStep = 1.;
+		double yStep = 0.33;
 
 		double x = xMin;
 		while (x < xMax)

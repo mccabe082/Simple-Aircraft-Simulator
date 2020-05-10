@@ -23,8 +23,6 @@ namespace interp
 		using Column = std::vector<double>;
 
 		DataTable2D(const std::string& filename) {}
-		//const Row& getRow(size_t j) const { return fRows[j]; }
-		//const Column& getColumn(size_t i) const { return fCols[i]; }
 		double lookup(size_t row, size_t column) const { return fRows[row][column]; }
 
 		std::vector<double> xSamples;
@@ -41,12 +39,7 @@ namespace interp
 	double BilinearLookup::operator()(double x, double y) const
 	{
 		const auto [xRowIndex1, xRowIndex2] = getUpperAndLowerInterpIndices(data->xSamples, x);
-		//const DataTable2D::Row& row1 = data->getRow(xRowIndex1);
-		//const DataTable2D::Row& row2 = data->getRow(xRowIndex2);
-
 		const auto [xColumnIndex1, xColumnIndex2] = getUpperAndLowerInterpIndices(data->ySamples, y);
-		//const DataTable2D::Column& column1 = data->getColumn(xColumnIndex1);
-		//const DataTable2D::Column& column2 = data->getColumn(xColumnIndex2);
 
 		double x1 = data->xSamples[xRowIndex1];
 		double x2 = data->xSamples[xRowIndex2];
@@ -58,9 +51,10 @@ namespace interp
 		double f21 = data->lookup(xRowIndex2, xColumnIndex1);
 		double f22 = data->lookup(xRowIndex2, xColumnIndex2);
 
+		double f1 = f21 * (x2 - x) / (x2 - x1) + f11 * (x - x1) / (x2 - x1);
+		double f2 = f22 * (x2 - x) / (x2 - x1) + f12 * (x - x1) / (x2 - x1);
 
-
-		return 0.;
+		return f2 * (y2 - y) / (y2 - y1) + f1 * (y - y1) / (y2 - y1);
 	}
 
 }

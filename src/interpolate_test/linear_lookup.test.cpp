@@ -4,7 +4,7 @@
 
 using namespace interp;
 
-TEST_CASE("Simply linear lookup tests", "[linear_lookup]")
+TEST_CASE("Simple linear lookup tests", "[linear_lookup]")
 {
 	LinearLookup straight_line;
 	straight_line.addDataPoint(0., 0.);

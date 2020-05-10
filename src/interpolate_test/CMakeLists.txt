@@ -3,6 +3,7 @@ add_executable(interpolateTest)
 target_sources(interpolateTest
 PRIVATE
   linear_lookup.test.cpp
+  nearest_neighbour2d.test.cpp
 )
 
 target_include_directories(interpolateTest

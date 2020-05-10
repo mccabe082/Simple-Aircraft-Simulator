@@ -1,6 +1,7 @@
 #include "nearest_neighbour2d.h"
 #include <cmath>
 #include <algorithm>
+#include <limits>
 
 namespace interp
 {
@@ -12,21 +13,24 @@ namespace interp
 	bool LinearLookup::addDataPoint(double f, double x, double y)
 	{
 		NNDataPoint2D newP{ x,y,f };
-
-		const NNDataPoint2D& nn = findNearestNeighbour(x, y);
-
-		if (NNDataPoint2D::distance(nn, newP) > 0.)
+		
+		if (!data.empty())
 		{
-			data.push_back(NNDataPoint2D{ x,y,f });
-			return true;
+			const NNDataPoint2D& nn = findNearestNeighbour(x, y);
+
+			if (NNDataPoint2D::distance(nn, newP) == std::numeric_limits<double>::epsilon())
+			{
+				return false;
+			}
 		}
 
-		return false;
+		data.push_back(NNDataPoint2D{ x,y,f });
+		return true;
 	}
 
 	double LinearLookup::operator()(double x, double y) const
 	{
-		return 0.;
+		return findNearestNeighbour(x,y).f;
 	}
 
 	NNDataPoint2D LinearLookup::findNearestNeighbour(double x, double y) const

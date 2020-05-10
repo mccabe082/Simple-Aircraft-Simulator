@@ -1,46 +1,21 @@
-/*#pragma once
-
+#pragma once
+#include "interpolate/lookup2d.h"
+#include "linear_lookup.h"
 #include <array>
+#include <string>
+#include <memory>
 
 namespace interp
 {
-	//template <class T, size_t xSize, size_t ySize>
-#define T double
-#define xSize 3
-#define ySize 3
+	class DataTable2D;
 
-	class BilinearLookup
+	class BilinearLookup : Lookup2D
 	{
 	public:
-		BilinearLookup()
-		{
-			// need to ensure monatonically increasing
-		}
-
-		T operator()(T x, T y)
-		{
-			size_t x1 = x;
-			size_t x2 = x;
-			size_t y1 = y;
-			size_t y2 = y;
-
-			T Q11 = (x1, y1);
-			T Q12 = (x1, y2);
-			T Q21 = (x2, y1);
-			T Q22 = (x2, y2);
-		}
-
-		size_t xLowerIndex(T x) const;
-		size_t xUpperIndex(T x) const;
-		size_t yLowerIndex(T y) const;
-		size_t yUpperIndex(T y) const;
-
-
+		BilinearLookup(const std::string& filename);
+		double operator()(double x, double y) const override;
 
 	private:
-
-		std::array<T, xSize> xValues;
-		std::array<T, ySize> yValues;
-		std::array<xSize, std::array<T, ySize>> data;
+		std::unique_ptr<DataTable2D> data;
 	};
-}*/
+}

@@ -10,7 +10,7 @@ namespace interp
 		return std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2);
 	}
 
-	bool LinearLookup::addDataPoint(double f, double x, double y)
+	bool NearestNeighbour2DLookup::addDataPoint(double f, double x, double y)
 	{
 		NNDataPoint2D newP{ x,y,f };
 		
@@ -28,12 +28,12 @@ namespace interp
 		return true;
 	}
 
-	double LinearLookup::operator()(double x, double y) const
+	double NearestNeighbour2DLookup::operator()(double x, double y) const
 	{
 		return findNearestNeighbour(x,y).f;
 	}
 
-	NNDataPoint2D LinearLookup::findNearestNeighbour(double x, double y) const
+	NNDataPoint2D NearestNeighbour2DLookup::findNearestNeighbour(double x, double y) const
 	{
 		constexpr double UNUSED = 0.;
 		NNDataPoint2D pX{ x,y,UNUSED };

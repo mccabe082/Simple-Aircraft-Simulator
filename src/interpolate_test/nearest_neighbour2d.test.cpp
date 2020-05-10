@@ -13,20 +13,20 @@ TEST_CASE("nearest neighbour quatrent classification (not a unit test) test", "[
 		TOP_LEFT = 4,
 	};
 
-	LinearLookup square_data;
-	square_data.addDataPoint(-1., -1., double(Quadrant::BOTTOM_LEFT));
-	square_data.addDataPoint(1.0, -1., double(Quadrant::BOTTOM_RIGHT));
-	square_data.addDataPoint(1.0, 1.0, double(Quadrant::TOP_RIGHT));
-	square_data.addDataPoint(-1., 1.0, double(Quadrant::TOP_LEFT));
+	NearestNeighbour2DLookup square_data;
+	square_data.addDataPoint(double(Quadrant::BOTTOM_LEFT), -1., -1.);
+	square_data.addDataPoint(double(Quadrant::BOTTOM_RIGHT), 1.0, -1.);
+	square_data.addDataPoint(double(Quadrant::TOP_RIGHT), 1.0, 1.0);
+	square_data.addDataPoint(double(Quadrant::TOP_LEFT), -1., 1.0);
 
 	SECTION("Try and classify the statespace correctly...")
 	{
 		double xMin = -3.;
 		double xMax = 3.;
-		double xStep = 0.5;
+		double xStep = 1.;
 		double yMin = -3.;
 		double yMax = 3.;
-		double yStep = 0.5;
+		double yStep = 1.;
 
 		double x = xMin;
 		while (x < xMax)
@@ -38,8 +38,8 @@ TEST_CASE("nearest neighbour quatrent classification (not a unit test) test", "[
 					y > 0 ? Quadrant::TOP_RIGHT : Quadrant::BOTTOM_RIGHT :
 					y > 0 ? Quadrant::TOP_LEFT : Quadrant::BOTTOM_LEFT;
 
-				REQUIRE(square_data(x,y) == Approx(double(expected)));
-				
+				REQUIRE(square_data(x, y) == Approx(double(expected)));
+
 				y += yStep;
 			}
 			x += xStep;

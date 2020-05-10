@@ -16,7 +16,7 @@ namespace interp
     
     using NNDataTable2D = std::vector<NNDataPoint2D>;
 
-	class LinearLookup : public Lookup2D
+	class NearestNeighbour2DLookup : public Lookup2D
 	{
 	public:
 		bool addDataPoint(double x, double y, double f);

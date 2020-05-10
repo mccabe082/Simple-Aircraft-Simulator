@@ -42,12 +42,12 @@ TEST_CASE("Simple linear lookup tests", "[linear_lookup]")
 	{
 		double xMin = -3.;
 		double xMax = 3.;
-		double xStep = 0.1;
+		double xStep = .5;
 
 		double x = xMin;
 		while (x < xMax)
 		{
-			REQUIRE(straight_line(x) == Approx(1.));
+			REQUIRE(straight_line(x) == Approx(x));
 			x += xStep;
 		}
 	}

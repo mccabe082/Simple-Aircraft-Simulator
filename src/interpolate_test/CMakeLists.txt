@@ -2,6 +2,7 @@ add_executable(interpolateTest)
 
 target_sources(interpolateTest
 PRIVATE
+  bilinear_lookup.test.cpp
   linear_lookup.test.cpp
   nearest_neighbour2d.test.cpp
 )

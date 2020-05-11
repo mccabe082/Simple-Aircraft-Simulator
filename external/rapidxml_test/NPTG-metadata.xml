@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Metadata>
+  <Title>National Public Transport Gazetteer (NPTG)</Title>
+  <Description>NPTG provides a topographic database of towns and settlements in Great Britain. It provides a common frame of reference for the National Public Transport Access Nodes (NaPTAN) schema and other UK Public Transport Information schemas such as JourneyWeb. The appropriate naming and geospatial locations of towns and places is vital for providing effective place and stop finding in online journey planners and other Passenger Information systems. Names are those that would be used by the people that reside or work in that place; the geospatial location is selected to optimise journey planning and other passenger information usage. The NPTG XML schema is used to distribute topographic data from the NPTG database to the local Administrative Areas who administer NaPTAN data, as well as other downstream Public Transport information systems such as journey planners.</Description>
+  <Publisher>Department for Transport</Publisher>
+  <Language>English</Language>
+  <Overview>
+    <UpdateFrequency>Daily</UpdateFrequency>
+    <Tags>
+      <Tag>Transport</Tag>
+      <Tag>Public-Transport</Tag>
+      <Tag>Locality</Tag>
+      <Tag>Gazetteer</Tag>
+      <Tag>City</Tag>
+      <Tag>Town</Tag>
+      <Tag>Village</Tag>
+      <Tag>Suburb</Tag>
+      <Tag>Settlement</Tag>
+      <Tag>Topography</Tag>
+      <Tag>Location</Tag>
+      <Tag>Easting-Northing</Tag>
+      <Tag>Ordnance-Survey-Grid-Reference</Tag>
+      <Tag>OSGR</Tag>
+      <Tag>Local-Authority</Tag>
+      <Tag>Local-Authority-Administrative-Area</Tag>
+    </Tags>
+    <Department>Department for Transport</Department>
+    <Wiki></Wiki>
+  </Overview>
+  <Download>
+    <XMLDownload>http://www.dft.gov.uk/NPTG/snapshot/NPTGxml.zip</XMLDownload>
+    <CSVDownload>http://www.dft.gov.uk/NPTG/snapshot/NPTGcsv.zip</CSVDownload>
+    <FullDescription>http://www.dft.gov.uk/nptg</FullDescription>
+  </Download>
+  <Details>
+    <Name>National Public Transport Gazetteer (NPTG)</Name>
+    <Licence>UK Crown Copyright with data.gov.uk rights, http://data.gov.uk/terms-and-conditions</Licence>
+    <Version>NPTG Schema Version 2.1</Version>
+    <GeographicCoverage>Great Britain (England, Scotland, Wales)</GeographicCoverage>
+    <GeographicGranularity>Great Britain, Local Authority Administrative Area</GeographicGranularity>
+    <TemporalGranularity>1 Day</TemporalGranularity>
+    <Agency>Department for Transport</Agency>
+    <Precision>+/- 1 metre spatial accuracy of Ordnance Survey Grid Reference</Precision>
+    <TaxonomyURL>-</TaxonomyURL>
+    <Categories>
+      <Category>Transport</Category>
+      <Category>Geospatial</Category>
+    </Categories>
+  </Details>
+  <ContactInformation>
+    <Team>Department for Transport</Team>
+    <ContactFeedbackURL>Naptan.NPTG@dft.gsi.gov.uk</ContactFeedbackURL>
+  </ContactInformation>
+</Metadata>

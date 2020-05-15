@@ -19,9 +19,9 @@ namespace interp
 {
 	BilinearLookup BilinearLookup::load(const std::string& filename)
 	{
-		BilinearLookup t;
-		XMLLookupReading::readFile(filename, t);
-		return t;
+		BilinearLookup table;
+		XMLLookupReading::readFile(filename, table);
+		return table;
 	}
 
 	double BilinearLookup::operator()(double x, double y) const

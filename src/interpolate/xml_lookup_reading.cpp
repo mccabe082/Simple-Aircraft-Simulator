@@ -12,6 +12,30 @@ namespace
 	using namespace rapidxml;
 	using NodePtr = xml_node<>*;
 	using XMLDoc = xml_document<>;
+
+	void tokenise(const std::string& csvStr, std::vector<double>& values)
+	{
+		std::vector<double> constructionValues;
+		static constexpr char* whitespaces = " \t\f\v\n\r";
+		try
+		{
+			std::string::size_type currentPos = 0;
+			std::string::size_type cumulativePos = 0;
+			std::string::size_type finalPos = csvStr.find_last_not_of(whitespaces);
+			while (cumulativePos < finalPos)
+			{
+				double token = std::stod(csvStr.substr(cumulativePos), &currentPos);
+				cumulativePos += currentPos;
+				constructionValues.push_back(token);
+			}
+
+			values = std::move(constructionValues);
+		}
+		catch (...)
+		{
+			throw (std::runtime_error("malformed token (#" + std::to_string(constructionValues.size() + 1) + ")"));
+		}
+	}
 }
 
 namespace interp
@@ -26,7 +50,8 @@ namespace interp
 				if (columnHeaderNode)
 				{
 					std::string_view rowDescription = columnHeaderNode->first_attribute("description")->value();
-					std::string_view columnDataStr = columnHeaderNode->value();
+					std::string columnDataStr = columnHeaderNode->value();
+					tokenise(columnDataStr, table.xSamples);
 					return;
 				}
 			}

@@ -1,5 +1,5 @@
 #include "bilinear_lookup.h"
-#include "data_table_2d.h"
+#include "xml_lookup_reading.h"
 
 namespace
 {
@@ -17,23 +17,27 @@ namespace
 
 namespace interp
 {
-	BilinearLookup::BilinearLookup(const std::string& filename) : data(std::make_unique<DataTable2D>(filename))
-	{}
+	BilinearLookup BilinearLookup::load(const std::string& filename)
+	{
+		BilinearLookup t;
+		XMLLookupReading::readFile(filename, t);
+		return t;
+	}
 
 	double BilinearLookup::operator()(double x, double y) const
 	{
-		const auto [xRowIndex1, xRowIndex2] = getUpperAndLowerInterpIndices(data->xSamples, x);
-		const auto [xColumnIndex1, xColumnIndex2] = getUpperAndLowerInterpIndices(data->ySamples, y);
+		const auto [xRowIndex1, xRowIndex2] = getUpperAndLowerInterpIndices(xSamples, x);
+		const auto [xColumnIndex1, xColumnIndex2] = getUpperAndLowerInterpIndices(ySamples, y);
 
-		double x1 = data->xSamples[xRowIndex1];
-		double x2 = data->xSamples[xRowIndex2];
-		double y1 = data->ySamples[xColumnIndex1];
-		double y2 = data->ySamples[xColumnIndex2];
+		double x1 = xSamples[xRowIndex1];
+		double x2 = xSamples[xRowIndex2];
+		double y1 = ySamples[xColumnIndex1];
+		double y2 = ySamples[xColumnIndex2];
 
-		double f11 = data->lookup(xRowIndex1, xColumnIndex1);
-		double f12 = data->lookup(xRowIndex1, xColumnIndex2);
-		double f21 = data->lookup(xRowIndex2, xColumnIndex1);
-		double f22 = data->lookup(xRowIndex2, xColumnIndex2);
+		double f11 = lookup(xRowIndex1, xColumnIndex1);
+		double f12 = lookup(xRowIndex1, xColumnIndex2);
+		double f21 = lookup(xRowIndex2, xColumnIndex1);
+		double f22 = lookup(xRowIndex2, xColumnIndex2);
 
 		double f1 = f21 * (x2 - x) / (x2 - x1) + f11 * (x - x1) / (x2 - x1);
 		double f2 = f22 * (x2 - x) / (x2 - x1) + f12 * (x - x1) / (x2 - x1);

@@ -11,8 +11,8 @@ PRIVATE
   ../../include/interpolate/lookup2d.h
   bilinear_lookup.cpp
   bilinear_lookup.h
-  data_table_2d.cpp
-  data_table_2d.h
+  xml_lookup_reading.cpp
+  xml_lookup_reading.h
   linear_lookup.cpp
   linear_lookup.h
   nearest_neighbour2d.cpp

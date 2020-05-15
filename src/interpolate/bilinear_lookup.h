@@ -1,16 +1,13 @@
 #pragma once
 #include "interpolate/lookup2d.h"
 #include "linear_lookup.h"
+#include "data_table_2d.h"
 #include <array>
 #include <string>
 #include <memory>
 
 namespace interp
 {
-	class DataTable2D;
-
-
-
 	class BilinearLookup : Lookup2D
 	{
 	public:

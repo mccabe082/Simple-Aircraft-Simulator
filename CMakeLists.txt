@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 enable_language(CXX)
-project(simple-flightpath-simulator)
+project(simple-aircraft-simulator)
 
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBIITY_INLINES_HIDDEN YES)
@@ -21,6 +21,7 @@ mark_as_advanced(FindModuleDir)
 list(APPEND CMAKE_MODULE_PATH ${FindModuleDir})
 find_package(Boost REQUIRED MODULE)
 find_package(Catch2 REQUIRED MODULE)
+find_package(RapidXML REQUIRED MODULE)
 
 ### Testing #########################
 ENABLE_TESTING()

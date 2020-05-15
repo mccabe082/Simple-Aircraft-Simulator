@@ -1,4 +1,5 @@
 #include "bilinear_lookup.h"
+#include "data_table_2d.h"
 
 namespace
 {
@@ -16,24 +17,7 @@ namespace
 
 namespace interp
 {
-
-	struct DataTable2D
-	{
-		using Row = std::vector<double>;
-		using Column = std::vector<double>;
-
-		DataTable2D(const std::string& filename) {}
-		double lookup(size_t row, size_t column) const { return fRows[row][column]; }
-
-		std::vector<double> xSamples;
-		std::vector<double> ySamples;
-		std::vector<Row> fRows;
-		std::vector<Column> fCols;
-	};
-
-
-	BilinearLookup::BilinearLookup(const std::string& filename) :
-		data(std::make_unique<DataTable2D>(filename))
+	BilinearLookup::BilinearLookup(const std::string& filename) : data(std::make_unique<DataTable2D>(filename))
 	{}
 
 	double BilinearLookup::operator()(double x, double y) const

@@ -57,7 +57,7 @@ namespace interp
 			}
 			catch (...)
 			{
-				throw (std::runtime_error("missing or malformed <Column> element"));
+				throw std::runtime_error("missing or malformed <Column> element");
 			}
 		}
 
@@ -69,13 +69,13 @@ namespace interp
 				if (rowHeaderNode)
 				{
 					std::string_view rowDescription = rowHeaderNode->first_attribute("description")->value();
-					std::string_view rowDataStr = rowHeaderNode->value();
+					tokenise(std::string(rowHeaderNode->value()), table.ySamples);
 					return;
 				}
 			}
 			catch (...)
 			{
-				throw (std::runtime_error("missing or malformed <Row> element"));
+				throw std::runtime_error("missing or malformed <Row> element");
 			}
 		}
 
@@ -91,11 +91,11 @@ namespace interp
 			}
 			catch (std::runtime_error ex)
 			{
-				throw (std::runtime_error("reading <Values> element: " + std::string(ex.what())));
+				throw std::runtime_error("reading <Values> element: " + std::string(ex.what()));
 			}
 			catch (...)
 			{
-				throw (std::runtime_error("missing or malformed <Values> element"));
+				throw std::runtime_error("missing or malformed <Values> element");
 			}
 		}
 
@@ -115,28 +115,57 @@ namespace interp
 			}
 			catch (std::runtime_error ex)
 			{
-				throw (std::runtime_error("reading <LookupTable2D> element: " + std::string(ex.what())));
+				throw std::runtime_error("reading <LookupTable2D> element: " + std::string(ex.what()));
 			}
 			catch (...)
 			{
-				throw (std::runtime_error("missing or malformed <LookupTable2D> element"));
+				throw std::runtime_error("missing or malformed <LookupTable2D> element");
 			}
 		}
 
-		void readRowElement(const NodePtr valuesNode, Lookup2DTable& table)
+		void readRowElements(const NodePtr valuesNode, Lookup2DTable& table)
 		{
+			const size_t ROWS = table.xSamples.size();
+			const size_t COLS = table.ySamples.size();
+
+			table.fRows.resize(COLS, Lookup2DTable::Row(ROWS, 0.));
+			table.fCols.resize(ROWS, Lookup2DTable::Column(COLS, 0.));
+
 			try
 			{
+				size_t iRow = 0;
+				Lookup2DTable::Row rowOnFile;
 				NodePtr rowNode = valuesNode->first_node("Row");
+
 				while (rowNode)
 				{
-					std::string_view xDataStr = rowNode->value();
+					if (iRow >= ROWS) throw std::runtime_error("too many rows in lookup table");
+
+					tokenise(std::string(rowNode->value()), rowOnFile);
+
+					if (rowOnFile.size() < COLS) throw std::runtime_error("too many columns in lookup table, row #" + iRow);
+					if (rowOnFile.size() > COLS) throw std::runtime_error("too few columns in lookup table" + iRow);
+
+					for (size_t iCol = 0; iCol < COLS; ++iCol)
+					{
+						table.fRows[iCol][iRow] = rowOnFile[iCol];
+						table.fCols[iRow][iCol] = rowOnFile[iCol];
+					}
+					iRow++;
 					rowNode = rowNode->next_sibling("Row");
 				}
+
+				if (iRow < ROWS) throw std::runtime_error("too few row in lookup table");
+
+
+			}
+			catch (std::runtime_error ex)
+			{
+				throw std::runtime_error("reading <Row> elements: " + std::string(ex.what()));
 			}
 			catch (...)
 			{
-				throw (std::runtime_error("missing or malformed Row element"));
+				throw std::runtime_error("missing or malformed Row elements");
 			}
 		}
 

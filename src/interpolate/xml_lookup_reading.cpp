@@ -79,50 +79,6 @@ namespace interp
 			}
 		}
 
-		void readValuesElement(const NodePtr lookupTable2DNode, Lookup2DTable& table)
-		{
-			try
-			{
-				NodePtr valuesNode = lookupTable2DNode->first_node("Values");
-				if (valuesNode)
-				{
-					std::string_view xDataStr = valuesNode->value();
-				}
-			}
-			catch (std::runtime_error ex)
-			{
-				throw std::runtime_error("reading <Values> element: " + std::string(ex.what()));
-			}
-			catch (...)
-			{
-				throw std::runtime_error("missing or malformed <Values> element");
-			}
-		}
-
-		void readLookupTable2DElement(const XMLDoc& doc, Lookup2DTable& table)
-		{
-			try
-			{
-				NodePtr lookupTable2DNode = doc.first_node("LookupTable2D");
-				if (lookupTable2DNode)
-				{
-					std::string_view tableDescription = lookupTable2DNode->first_attribute("description")->value();
-
-					readColumnHeaderElement(lookupTable2DNode, table);
-					readRowHeaderElement(lookupTable2DNode, table);
-					readValuesElement(lookupTable2DNode, table);
-				}
-			}
-			catch (std::runtime_error ex)
-			{
-				throw std::runtime_error("reading <LookupTable2D> element: " + std::string(ex.what()));
-			}
-			catch (...)
-			{
-				throw std::runtime_error("missing or malformed <LookupTable2D> element");
-			}
-		}
-
 		void readRowElements(const NodePtr valuesNode, Lookup2DTable& table)
 		{
 			const size_t ROWS = table.xSamples.size();
@@ -166,6 +122,50 @@ namespace interp
 			catch (...)
 			{
 				throw std::runtime_error("missing or malformed Row elements");
+			}
+		}
+
+		void readValuesElement(const NodePtr lookupTable2DNode, Lookup2DTable& table)
+		{
+			try
+			{
+				NodePtr valuesNode = lookupTable2DNode->first_node("Values");
+				if (valuesNode)
+				{
+					return readRowElements(valuesNode, table);
+				}
+			}
+			catch (std::runtime_error ex)
+			{
+				throw std::runtime_error("reading <Values> element: " + std::string(ex.what()));
+			}
+			catch (...)
+			{
+				throw std::runtime_error("missing or malformed <Values> element");
+			}
+		}
+
+		void readLookupTable2DElement(const XMLDoc& doc, Lookup2DTable& table)
+		{
+			try
+			{
+				NodePtr lookupTable2DNode = doc.first_node("LookupTable2D");
+				if (lookupTable2DNode)
+				{
+					std::string_view tableDescription = lookupTable2DNode->first_attribute("description")->value();
+
+					readColumnHeaderElement(lookupTable2DNode, table);
+					readRowHeaderElement(lookupTable2DNode, table);
+					readValuesElement(lookupTable2DNode, table);
+				}
+			}
+			catch (std::runtime_error ex)
+			{
+				throw std::runtime_error("reading <LookupTable2D> element: " + std::string(ex.what()));
+			}
+			catch (...)
+			{
+				throw std::runtime_error("missing or malformed <LookupTable2D> element");
 			}
 		}
 

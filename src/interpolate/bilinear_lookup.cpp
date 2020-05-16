@@ -39,10 +39,10 @@ namespace interp
 		double f21 = lookup(xRowIndex2, xColumnIndex1);
 		double f22 = lookup(xRowIndex2, xColumnIndex2);
 
-		double f1 = f21 * (x2 - x) / (x2 - x1) + f11 * (x - x1) / (x2 - x1);
-		double f2 = f22 * (x2 - x) / (x2 - x1) + f12 * (x - x1) / (x2 - x1);
+		double f1 = f11 * (x2 - x) / (x2 - x1) + f21 * (x - x1) / (x2 - x1);
+		double f2 = f12 * (x2 - x) / (x2 - x1) + f22 * (x - x1) / (x2 - x1);
 
-		return f2 * (y2 - y) / (y2 - y1) + f1 * (y - y1) / (y2 - y1);
+		return f1 * (y2 - y) / (y2 - y1) + f2 * (y - y1) / (y2 - y1);
 	}
 
 }

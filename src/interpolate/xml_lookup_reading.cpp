@@ -85,7 +85,6 @@ namespace interp
 			const size_t COLS = table.ySamples.size();
 
 			table.fRows.resize(COLS, Lookup2DTable::Row(ROWS, 0.));
-			table.fCols.resize(ROWS, Lookup2DTable::Column(COLS, 0.));
 
 			try
 			{
@@ -105,7 +104,6 @@ namespace interp
 					for (size_t iCol = 0; iCol < COLS; ++iCol)
 					{
 						table.fRows[iCol][iRow] = rowOnFile[iCol];
-						table.fCols[iRow][iCol] = rowOnFile[iCol];
 					}
 					iRow++;
 					rowNode = rowNode->next_sibling("Row");

@@ -36,6 +36,13 @@ namespace
 			throw (std::runtime_error("malformed token (#" + std::to_string(constructionValues.size() + 1) + ")"));
 		}
 	}
+
+	bool notSorted(std::vector<double>& values)
+	{
+		return !std::is_sorted(values.begin(), values.end());
+	}
+
+
 }
 
 namespace interp
@@ -52,8 +59,13 @@ namespace interp
 					std::string_view rowDescription = columnHeaderNode->first_attribute("description")->value();
 					std::string columnDataStr = columnHeaderNode->value();
 					tokenise(columnDataStr, table.xSamples);
+					if (notSorted(table.xSamples)) throw std::runtime_error("column header data isn't strictly increasing");
 					return;
 				}
+			}
+			catch (std::runtime_error ex)
+			{
+				throw std::runtime_error("reading <Column> header element: " + std::string(ex.what()));
 			}
 			catch (...)
 			{
@@ -70,8 +82,13 @@ namespace interp
 				{
 					std::string_view rowDescription = rowHeaderNode->first_attribute("description")->value();
 					tokenise(std::string(rowHeaderNode->value()), table.ySamples);
+					if (notSorted(table.ySamples)) throw std::runtime_error("row header data isn't strictly increasing");
 					return;
 				}
+			}
+			catch (std::runtime_error ex)
+			{
+				throw std::runtime_error("reading <Row> header element: " + std::string(ex.what()));
 			}
 			catch (...)
 			{

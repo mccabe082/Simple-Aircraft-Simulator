@@ -3,7 +3,7 @@
 
 namespace interp
 {
-	LookupTable2D* LookupTable2D::load(const std::string& filename)
+	std::unique_ptr<LookupTable2D> LookupTable2D::load(const std::string& filename)
 	{
 		return XMLLookupReading::load(filename);
 	}

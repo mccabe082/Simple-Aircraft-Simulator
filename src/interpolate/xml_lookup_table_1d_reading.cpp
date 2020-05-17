@@ -8,6 +8,7 @@
 #include <string_view>
 #include <algorithm>
 #include <limits>
+#include <memory>
 
 namespace
 {
@@ -113,8 +114,7 @@ namespace interp
 			}
 		}
 
-		// leaky factory method!!!!
-		LookupTable1D* readInterpolationMethod(const NodePtr lookupTable1DNode)
+		std::unique_ptr<LookupTable1D> readInterpolationMethod(const NodePtr lookupTable1DNode)
 		{
 			auto* pDescriptionAttribute = lookupTable1DNode->first_attribute("method");
 
@@ -124,7 +124,7 @@ namespace interp
 
 			if (interpolationMethod == "linear")
 			{
-				return new LinearInterpolation();
+				return std::make_unique<LinearInterpolation>();
 			}
 
 			throw std::runtime_error("unrecognised interpolation method (" + interpolationMethod + ")");
@@ -132,7 +132,7 @@ namespace interp
 			return nullptr;
 		}
 
-		LookupTable1D* readLookupTable1DElement(const XMLDoc& doc)
+		std::unique_ptr<LookupTable1D> readLookupTable1DElement(const XMLDoc& doc)
 		{
 			try
 			{
@@ -141,10 +141,12 @@ namespace interp
 				{
 					std::string_view tableDescription = lookupTable1DNode->first_attribute("description")->value();
 
-					LookupTable1D* pTable = readInterpolationMethod(lookupTable1DNode);
+					std::unique_ptr<LookupTable1D> pTable = readInterpolationMethod(lookupTable1DNode);
 
 					readInputElement(lookupTable1DNode, *pTable);
 					readOutputElement(lookupTable1DNode, *pTable);
+
+					return pTable;
 				}
 			}
 			catch (std::runtime_error ex)
@@ -159,7 +161,7 @@ namespace interp
 			return nullptr;
 		}
 
-		LookupTable1D* load(const std::string& filename)
+		std::unique_ptr<LookupTable1D> load(const std::string& filename)
 		{
 			try
 			{

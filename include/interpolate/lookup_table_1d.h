@@ -2,13 +2,14 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 namespace interp
 {
 	class LookupTable1D
 	{
 	public:
-		static LookupTable1D* load(const std::string& filename);
+		static std::unique_ptr<LookupTable1D> load(const std::string& filename);
 
 		struct DataPoint
 		{

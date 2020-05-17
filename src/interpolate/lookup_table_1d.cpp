@@ -9,7 +9,7 @@ namespace
 
 namespace interp
 {
-	LookupTable1D* LookupTable1D::load(const std::string& filename)
+	std::unique_ptr<LookupTable1D> LookupTable1D::load(const std::string& filename)
 	{
 		return XMLLookupReading::load(filename);
 	}

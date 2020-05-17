@@ -1,5 +1,5 @@
 #include "bilinear_interpolation.h"
-#include "xml_lookup_reading.h"
+#include "xml_lookup_table_2d_reading.h"
 
 namespace
 {

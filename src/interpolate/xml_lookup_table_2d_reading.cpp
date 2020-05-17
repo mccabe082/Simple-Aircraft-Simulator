@@ -1,4 +1,4 @@
-#include "xml_lookup_reading.h"
+#include "xml_lookup_table_2d_reading.h"
 #include "rapidxml.hpp"
 #include "rapidxml_utils.hpp"
 #include "bilinear_interpolation.h"

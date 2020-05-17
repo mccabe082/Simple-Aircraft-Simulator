@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 namespace interp
 {
@@ -15,10 +16,10 @@ namespace interp
 		using Row = std::vector<double>;
 		using Column = std::vector<double>;
 
-		double lookup(size_t row, size_t column) const { return fRows[row][column]; }
-		double& lookup(size_t row, size_t column) { return fRows[row][column]; }
-
-		/*protected: constider a friend class for xml parsing*/
+		static LookupTable2D* load(const std::string& filename);
+		double lookup(size_t row, size_t column) const;
+		double& lookup(size_t row, size_t column);
+	
 		Row xSamples;
 		Column ySamples;
 		std::vector<Row> fRows;

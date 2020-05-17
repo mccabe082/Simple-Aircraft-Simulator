@@ -25,12 +25,12 @@ namespace
 namespace interp
 {
 
-	LinearInterpolation LinearInterpolation::load(const std::string& filename)
-	{
-		LinearInterpolation table;
-		XMLLookupReading::readFile(filename, table);
-		return table;
-	}
+	//LinearInterpolation LinearInterpolation::load(const std::string& filename)
+	//{
+	//	LinearInterpolation table;
+	//	XMLLookupReading::readFile(filename, table);
+	//	return table;
+	//}
 
 	double LinearInterpolation::operator()(double x) const
 	{

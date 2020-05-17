@@ -9,6 +9,8 @@ target_sources(interpolate
 PRIVATE
   ../../include/interpolate/lookup_table_1d.h
   ../../include/interpolate/lookup_table_2d.h
+  lookup_table_1d.cpp
+  lookup_table_2d.cpp
   bilinear_interpolation.cpp
   bilinear_interpolation.h
   xml_lookup_table_1d_reading.cpp

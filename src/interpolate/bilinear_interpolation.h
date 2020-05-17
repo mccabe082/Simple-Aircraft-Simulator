@@ -6,13 +6,10 @@
 
 namespace interp
 {
-	class BilinearInterpolation : LookupTable2D
+	class BilinearInterpolation : public LookupTable2D
 	{
 	public:
-		static BilinearInterpolation load(const std::string& filename);
 		double operator()(double x, double y) const override;
-	private:
-		BilinearInterpolation() = default;
 	};
 
 }

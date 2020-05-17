@@ -161,7 +161,7 @@ namespace interp
 			}
 		}
 
-		void readLookupTable2DElement(const XMLDoc& doc, LookupTable2D& table)
+		LookupTable2D* readLookupTable2DElement(const XMLDoc& doc)
 		{
 			try
 			{
@@ -169,10 +169,21 @@ namespace interp
 				if (lookupTable2DNode)
 				{
 					std::string_view tableDescription = lookupTable2DNode->first_attribute("description")->value();
+					std::string_view interpolationMethod = lookupTable2DNode->first_attribute("interpolation")->value();
 
-					readColumnHeaderElement(lookupTable2DNode, table);
-					readRowHeaderElement(lookupTable2DNode, table);
-					readValuesElement(lookupTable2DNode, table);
+					LookupTable2D* pTable = nullptr;
+					if (interpolationMethod == "bilinear")
+					{
+						pTable = new BilinearInterpolation();
+					}
+					else
+					{
+						throw std::runtime_error("illegal/undeclared method for interpolation");
+					}
+
+					readColumnHeaderElement(lookupTable2DNode, *pTable);
+					readRowHeaderElement(lookupTable2DNode, *pTable);
+					readValuesElement(lookupTable2DNode, *pTable);
 				}
 			}
 			catch (std::runtime_error ex)
@@ -183,9 +194,11 @@ namespace interp
 			{
 				throw std::runtime_error("missing or malformed <LookupTable2D> element");
 			}
+
+			return nullptr;
 		}
 
-		bool readFile(const std::string& filename, LookupTable2D& table)
+		LookupTable2D* load(const std::string& filename)
 		{
 			try
 			{
@@ -193,9 +206,7 @@ namespace interp
 				rapidxml::xml_document<> doc;
 				doc.parse<0>(xmlFile.data());
 
-				readLookupTable2DElement(doc, table);
-
-				return true;
+				return readLookupTable2DElement(doc);
 			}
 			catch (std::runtime_error ex)
 			{
@@ -208,7 +219,7 @@ namespace interp
 
 			std::exit(EXIT_FAILURE);
 
-			return false;
+			return nullptr;
 		}
 	}
 }

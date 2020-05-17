@@ -17,12 +17,12 @@ namespace
 
 namespace interp
 {
-	BilinearInterpolation BilinearInterpolation::load(const std::string& filename)
-	{
-		BilinearInterpolation table;
-		XMLLookupReading::readFile(filename, table);
-		return table;
-	}
+	//BilinearInterpolation BilinearInterpolation::load(const std::string& filename)
+	//{
+	//	BilinearInterpolation table;
+	//	XMLLookupReading::readFile(filename, table);
+	//	return table;
+	//}
 
 	double BilinearInterpolation::operator()(double x, double y) const
 	{

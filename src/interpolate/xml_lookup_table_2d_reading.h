@@ -7,6 +7,6 @@ namespace interp
 {
 	namespace XMLLookupReading
 	{
-		bool readFile(const std::string& filename, LookupTable2D& table);
+		LookupTable2D* load(const std::string& filename);
 	}
 }

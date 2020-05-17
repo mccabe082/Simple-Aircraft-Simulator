@@ -43,8 +43,6 @@ namespace
 	{
 		return !std::is_sorted(values.begin(), values.end());
 	}
-
-	const interp::LookupTable1D::DataPoint emptyPoint{ std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN() };
 }
 
 namespace interp
@@ -63,7 +61,7 @@ namespace interp
 					tokenise(std::string(inputNode->value()), values);
 					if (notSorted(values)) throw std::runtime_error("row header data isn't strictly increasing");
 
-					table.resize(values.size(), emptyPoint);
+					table.resize(values.size());
 
 					size_t iVal = 0;
 					for (auto value : values)
@@ -115,7 +113,7 @@ namespace interp
 			}
 		}
 
-		void readLookupTable1DElement(const XMLDoc& doc, LookupTable1D& table)
+		LookupTable1D* readLookupTable1DElement(const XMLDoc& doc)
 		{
 			try
 			{
@@ -123,9 +121,20 @@ namespace interp
 				if (lookupTable1DNode)
 				{
 					std::string_view tableDescription = lookupTable1DNode->first_attribute("description")->value();
+					std::string_view interpolationMethod = lookupTable1DNode->first_attribute("interpolation")->value();
 
-					readInputElement(lookupTable1DNode, table);
-					readOutputElement(lookupTable1DNode, table);
+					LookupTable1D* pTable = nullptr;
+					if (interpolationMethod == "linear")
+					{
+						pTable = new LinearInterpolation();
+					}
+					else
+					{
+						throw std::runtime_error("illegal/undeclared method for interpolation");
+					}
+
+					readInputElement(lookupTable1DNode, *pTable);
+					readOutputElement(lookupTable1DNode, *pTable);
 				}
 			}
 			catch (std::runtime_error ex)
@@ -136,9 +145,11 @@ namespace interp
 			{
 				throw std::runtime_error("missing or malformed <LookupTable1D> element");
 			}
+			
+			return nullptr;
 		}
 
-		bool readFile(const std::string& filename, LookupTable1D& table)
+		LookupTable1D* load(const std::string& filename)
 		{
 			try
 			{
@@ -146,9 +157,7 @@ namespace interp
 				rapidxml::xml_document<> doc;
 				doc.parse<0>(xmlFile.data());
 
-				readLookupTable1DElement(doc, table);
-
-				return true;
+				return readLookupTable1DElement(doc);
 			}
 			catch (std::runtime_error ex)
 			{
@@ -161,7 +170,7 @@ namespace interp
 
 			std::exit(EXIT_FAILURE);
 
-			return false;
+			return nullptr;
 		}
 	}
 }

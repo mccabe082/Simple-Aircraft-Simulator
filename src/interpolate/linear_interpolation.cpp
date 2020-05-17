@@ -1,5 +1,5 @@
 #include "linear_interpolation.h"
-#include "xml_lookup_table_2d_reading.h"
+#include "xml_lookup_table_1d_reading.h"
 #include <algorithm>
 #include <tuple>
 
@@ -28,7 +28,7 @@ namespace interp
 	LinearInterpolation LinearInterpolation::load(const std::string& filename)
 	{
 		LinearInterpolation table;
-		//XMLLookupReading::readFile(filename, table);
+		XMLLookupReading::readFile(filename, table);
 		return table;
 	}
 

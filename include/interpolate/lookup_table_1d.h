@@ -25,6 +25,12 @@ namespace interp
 		};
 		using DataTable = std::vector<DataPoint>;
 
+		size_t size() const { return data.size(); }
+		void resize(size_t i, DataPoint p) { data.resize(i, p); }
+		DataPoint operator[](size_t i) const { return data[i]; }
+		DataPoint& operator[](size_t i) { return data[i]; }
+		void clear() { data.clear(); }
+
 	protected:
 		DataTable data;
 	};

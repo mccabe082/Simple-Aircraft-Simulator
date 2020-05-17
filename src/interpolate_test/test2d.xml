@@ -1,5 +1,5 @@
 <LookupTable2D description="product(x,y+0.3)">
-  <Column description="x"> -1  -0.8  -0.6  -0.4  -0.2  0  0.2  0.4  0.6  0.8  1 </Column>
+  <Column description="x"> -1  -0.8  -0.6  -0.4  -0.2  0  0.2  0.4  0.6  0.8  1 </Column> <!-- new to express this interms of input/output-->
   <Row description="y">  -1  -0.8  -0.6  -0.4  -0.2  0  0.2  0.4  0.6  0.8  1 </Row>
   <Values>
     <Row> 0.70	0.56	0.42	0.28	0.14	0.00	-0.14	-0.28	-0.42	-0.56	-0.70  </Row>

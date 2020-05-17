@@ -113,6 +113,25 @@ namespace interp
 			}
 		}
 
+		// leaky factory method!!!!
+		LookupTable1D* readInterpolationMethod(const NodePtr lookupTable1DNode)
+		{
+			auto* pDescriptionAttribute = lookupTable1DNode->first_attribute("method");
+
+			if (!pDescriptionAttribute) throw std::runtime_error("missing \"method\" attribute");
+
+			std::string interpolationMethod = pDescriptionAttribute->value();
+
+			if (interpolationMethod == "linear")
+			{
+				return new LinearInterpolation();
+			}
+
+			throw std::runtime_error("unrecognised interpolation method (" + interpolationMethod + ")");
+
+			return nullptr;
+		}
+
 		LookupTable1D* readLookupTable1DElement(const XMLDoc& doc)
 		{
 			try
@@ -121,17 +140,8 @@ namespace interp
 				if (lookupTable1DNode)
 				{
 					std::string_view tableDescription = lookupTable1DNode->first_attribute("description")->value();
-					std::string_view interpolationMethod = lookupTable1DNode->first_attribute("interpolation")->value();
 
-					LookupTable1D* pTable = nullptr;
-					if (interpolationMethod == "linear")
-					{
-						pTable = new LinearInterpolation();
-					}
-					else
-					{
-						throw std::runtime_error("illegal/undeclared method for interpolation");
-					}
+					LookupTable1D* pTable = readInterpolationMethod(lookupTable1DNode);
 
 					readInputElement(lookupTable1DNode, *pTable);
 					readOutputElement(lookupTable1DNode, *pTable);

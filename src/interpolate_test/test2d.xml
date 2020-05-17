@@ -1,4 +1,4 @@
-<LookupTable2D description="product(x,y+0.3)">
+<LookupTable2D description="product(x,y+0.3)" method="bilinear">
   <Column description="x"> -1  -0.8  -0.6  -0.4  -0.2  0  0.2  0.4  0.6  0.8  1 </Column> <!-- new to express this interms of input/output-->
   <Row description="y">  -1  -0.8  -0.6  -0.4  -0.2  0  0.2  0.4  0.6  0.8  1 </Row>
   <Values>

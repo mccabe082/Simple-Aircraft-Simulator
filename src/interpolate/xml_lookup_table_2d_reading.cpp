@@ -43,7 +43,6 @@ namespace
 		return !std::is_sorted(values.begin(), values.end());
 	}
 
-
 }
 
 namespace interp
@@ -161,6 +160,25 @@ namespace interp
 			}
 		}
 
+		// leaky factory method!!!!
+		LookupTable2D* readInterpolationMethod(const NodePtr lookupTable2DNode)
+		{
+			auto* pDescriptionAttribute = lookupTable2DNode->first_attribute("method");
+
+			if (!pDescriptionAttribute) throw std::runtime_error("missing \"method\" attribute");
+
+			std::string interpolationMethod = pDescriptionAttribute->value();
+
+			if (interpolationMethod == "bilinear")
+			{
+				return new BilinearInterpolation();
+			}
+
+			throw std::runtime_error("unrecognised interpolation method (" + interpolationMethod + ")");
+
+			return nullptr;
+		}
+
 		LookupTable2D* readLookupTable2DElement(const XMLDoc& doc)
 		{
 			try
@@ -169,17 +187,8 @@ namespace interp
 				if (lookupTable2DNode)
 				{
 					std::string_view tableDescription = lookupTable2DNode->first_attribute("description")->value();
-					std::string_view interpolationMethod = lookupTable2DNode->first_attribute("interpolation")->value();
 
-					LookupTable2D* pTable = nullptr;
-					if (interpolationMethod == "bilinear")
-					{
-						pTable = new BilinearInterpolation();
-					}
-					else
-					{
-						throw std::runtime_error("illegal/undeclared method for interpolation");
-					}
+					LookupTable2D* pTable = readInterpolationMethod(lookupTable2DNode);
 
 					readColumnHeaderElement(lookupTable2DNode, *pTable);
 					readRowHeaderElement(lookupTable2DNode, *pTable);

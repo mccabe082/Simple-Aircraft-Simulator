@@ -1,4 +1,4 @@
-<LookupTable1D description="1d test table", interpolation= "linear">
+<LookupTable1D description="1d test table" method="linear">
   <Input description="x">               0.0   1.0   2.0   </Input>
   <Output description="product(0.3,x)"> 0.0	  0.3	0.6   </Output>
 </LookupTable1D>

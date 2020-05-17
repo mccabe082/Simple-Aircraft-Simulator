@@ -1,12 +1,12 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-#include <interpolate/linear_lookup.h>
+#include <interpolate/linear_interpolation.h>
 
 using namespace interp;
 
 TEST_CASE("Simple linear lookup tests", "[linear_lookup]")
 {
-	LinearLookup straight_line;
+	LinearInterpolation straight_line;
 	straight_line.addDataPoint(0., 0.);
 	straight_line.addDataPoint(1., 1.);
 	straight_line.addDataPoint(2., 2.);

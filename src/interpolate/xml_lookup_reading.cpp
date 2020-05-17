@@ -1,7 +1,7 @@
 #include "xml_lookup_reading.h"
 #include "rapidxml.hpp"
 #include "rapidxml_utils.hpp"
-#include "bilinear_lookup.h"
+#include "bilinear_interpolation.h"
 #include <exception>
 #include <iostream>
 #include <string>
@@ -49,7 +49,7 @@ namespace interp
 {
 	namespace XMLLookupReading
 	{
-		void readColumnHeaderElement(const NodePtr lookupTable2DNode, Lookup2DTable& table)
+		void readColumnHeaderElement(const NodePtr lookupTable2DNode, LookupTable2D& table)
 		{
 			try
 			{
@@ -73,7 +73,7 @@ namespace interp
 			}
 		}
 
-		void readRowHeaderElement(const NodePtr lookupTable2DNode, Lookup2DTable& table)
+		void readRowHeaderElement(const NodePtr lookupTable2DNode, LookupTable2D& table)
 		{
 			try
 			{
@@ -96,17 +96,17 @@ namespace interp
 			}
 		}
 
-		void readRowElements(const NodePtr valuesNode, Lookup2DTable& table)
+		void readRowElements(const NodePtr valuesNode, LookupTable2D& table)
 		{
 			const size_t ROWS = table.xSamples.size();
 			const size_t COLS = table.ySamples.size();
 
-			table.fRows.resize(COLS, Lookup2DTable::Row(ROWS, 0.));
+			table.fRows.resize(COLS, LookupTable2D::Row(ROWS, 0.));
 
 			try
 			{
 				size_t iRow = 0;
-				Lookup2DTable::Row rowOnFile;
+				LookupTable2D::Row rowOnFile;
 				NodePtr rowNode = valuesNode->first_node("Row");
 
 				while (rowNode)
@@ -140,7 +140,7 @@ namespace interp
 			}
 		}
 
-		void readValuesElement(const NodePtr lookupTable2DNode, Lookup2DTable& table)
+		void readValuesElement(const NodePtr lookupTable2DNode, LookupTable2D& table)
 		{
 			try
 			{
@@ -160,7 +160,7 @@ namespace interp
 			}
 		}
 
-		void readLookupTable2DElement(const XMLDoc& doc, Lookup2DTable& table)
+		void readLookupTable2DElement(const XMLDoc& doc, LookupTable2D& table)
 		{
 			try
 			{
@@ -184,7 +184,7 @@ namespace interp
 			}
 		}
 
-		bool readFile(const std::string& filename, Lookup2DTable& table)
+		bool readFile(const std::string& filename, LookupTable2D& table)
 		{
 			try
 			{

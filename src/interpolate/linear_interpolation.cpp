@@ -1,4 +1,4 @@
-#include "linear_lookup.h"
+#include "linear_interpolation.h"
 #include <algorithm>
 #include <tuple>
 
@@ -6,12 +6,12 @@ using namespace interp;
 
 namespace
 {
-	std::pair<size_t, size_t> getUpperAndLowerInterpIndices(const DataTable1D& data, double x)
+	std::pair<size_t, size_t> getUpperAndLowerInterpIndices(const LookupTable1D::DataTable& data, double x)
 	{
 		constexpr double UNUSED = 0.;
 
-		DataPoint1D _x{ x, UNUSED };
-		const auto& it = std::lower_bound(data.begin(), data.end() - 1, _x, [](const DataPoint1D& p, const DataPoint1D& _x) {return p.x <= _x.x; });
+		LookupTable1D::DataPoint _x{ x, UNUSED };
+		const auto& it = std::lower_bound(data.begin(), data.end() - 1, _x, [](const LookupTable1D::DataPoint& p, const LookupTable1D::DataPoint& _x) {return p.x <= _x.x; });
 		size_t iUpper = it - data.begin();
 		size_t iLower = iUpper == 0 ? 0 : iUpper - 1;
 
@@ -23,18 +23,8 @@ namespace
 
 namespace interp
 {
-	bool LinearLookup::addDataPoint(double x, double f)
-	{
-		if (data.empty() || x > data.back().x)
-		{
-			data.push_back(DataPoint1D{ x, f });
-			return true;
-		}
 
-		return false; // reject points if independent variable is not strictly increasing
-	}
-
-	double LinearLookup::operator()(double x) const
+	double LinearInterpolation::operator()(double x) const
 	{
 		const auto [iUpper, iLower] = getUpperAndLowerInterpIndices(data, x);
 

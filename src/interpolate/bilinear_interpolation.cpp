@@ -1,4 +1,4 @@
-#include "bilinear_lookup.h"
+#include "bilinear_interpolation.h"
 #include "xml_lookup_reading.h"
 
 namespace
@@ -17,14 +17,14 @@ namespace
 
 namespace interp
 {
-	BilinearLookup BilinearLookup::load(const std::string& filename)
+	BilinearInterpolation BilinearInterpolation::load(const std::string& filename)
 	{
-		BilinearLookup table;
+		BilinearInterpolation table;
 		XMLLookupReading::readFile(filename, table);
 		return table;
 	}
 
-	double BilinearLookup::operator()(double x, double y) const
+	double BilinearInterpolation::operator()(double x, double y) const
 	{
 		const auto [xRowIndex1, xRowIndex2] = getUpperAndLowerInterpIndices(xSamples, x);
 		const auto [xColumnIndex1, xColumnIndex2] = getUpperAndLowerInterpIndices(ySamples, y);

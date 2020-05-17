@@ -1,11 +1,11 @@
 #include "catch.hpp"
-#include <interpolate/bilinear_lookup.h>
+#include <interpolate/bilinear_interpolation.h>
 
 using namespace interp;
 
 TEST_CASE("Simple bilinear lookup tests", "[bilinear_lookup]")
 {
-	auto testTable = BilinearLookup::load("D:/simple-aircraft-simulator/src/interpolate_test/test2d.xml");
+	auto testTable = BilinearInterpolation::load("D:/simple-aircraft-simulator/src/interpolate_test/test2d.xml");
 
 	auto testFunc = [](double x, double y) {return x * (y + .3); };
 

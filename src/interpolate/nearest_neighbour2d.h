@@ -1,6 +1,6 @@
 #pragma once
 
-#include "interpolate/lookup2d.h"
+#include "interpolate/lookup_table_2d.h"
 #include <vector>
 
 namespace interp

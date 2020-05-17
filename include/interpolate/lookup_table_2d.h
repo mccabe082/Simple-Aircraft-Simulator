@@ -9,7 +9,7 @@ namespace interp
 		virtual double operator()(double x, double y) const = 0;
 	};
 
-	class Lookup2DTable : Lookup2D
+	class LookupTable2D : Lookup2D
 	{
 	public:
 		using Row = std::vector<double>;

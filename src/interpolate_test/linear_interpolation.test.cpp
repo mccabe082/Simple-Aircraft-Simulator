@@ -4,10 +4,9 @@
 
 using namespace interp;
 
-TEST_CASE("Simple linear lookup tests", "[linear_lookup]")
+TEST_CASE("Simple linear interpolation tests", "[linear_interpolation]")
 {
-	auto straight_line = LinearInterpolation::load();
-
+	auto straight_line = LinearInterpolation::load("D:/simple-aircraft-simulator/src/interpolate_test/test1d.xml");
 
 	SECTION("Querying a point precisely returns the exact value in the table")
 	{

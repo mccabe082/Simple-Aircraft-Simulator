@@ -1,4 +1,4 @@
 <LookupTable1D description="1d test table">
-  <Input description="x">               -1      -0.8    -0.6    -0.4    -0.2    0       0.2     0.4     0.6     0.8     1     </Input>
-  <Output description="product(0.3,x)"> -0.30	-0.24	-0.18	-0.12	-0.06	0.00	0.06	0.12	0.18	0.24	0.30  </Output>
+  <Input description="x">      0.   1.   2.  </Input>
+  <Output description="y=x">   0.   1.   2.  </Output>
 </LookupTable1D>

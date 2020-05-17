@@ -1,14 +1,14 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-#include "interpolate/lookup_table_1d.h"
+#include "data.utilities/lookup_table_1d.h"
 
-using namespace interp;
+using namespace DataUtilities;
 
 auto testFunc = [](double x) {return x * .3; };
 
 TEST_CASE("Simple linear interpolation tests", "[linear_interpolation]")
 {
-	std::unique_ptr<LookupTable1D> pStraight_line = LookupTable1D::load("D:/simple-aircraft-simulator/src/interpolate_test/test1d.xml");
+	std::unique_ptr<LookupTable1D> pStraight_line = LookupTable1D::load("D:/simple-aircraft-simulator/src/data.utilities.test/test1d.xml");
 	const auto& straight_line = *pStraight_line;
 
 	SECTION("Querying a point precisely returns the exact value in the table")

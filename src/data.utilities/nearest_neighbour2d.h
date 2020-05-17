@@ -1,9 +1,9 @@
 #pragma once
 
-#include "interpolate/lookup_table_2d.h"
+#include "data.utilities/lookup_table_2d.h"
 #include <vector>
 
-namespace interp
+namespace DataUtilities
 {
     struct NNDataPoint2D
 	{

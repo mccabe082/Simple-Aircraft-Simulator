@@ -46,7 +46,7 @@ namespace
 
 }
 
-namespace interp
+namespace DataUtilities
 {
 	namespace XMLLookupReading
 	{

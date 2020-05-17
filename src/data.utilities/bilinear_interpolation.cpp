@@ -15,7 +15,7 @@ namespace
 	}
 }
 
-namespace interp
+namespace DataUtilities
 {
 	//BilinearInterpolation BilinearInterpolation::load(const std::string& filename)
 	//{

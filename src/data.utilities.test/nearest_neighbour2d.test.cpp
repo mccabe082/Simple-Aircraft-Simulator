@@ -1,7 +1,7 @@
 #include "catch.hpp"
-#include <interpolate/nearest_neighbour2d.h>
+#include <data.utilities/nearest_neighbour2d.h>
 
-using namespace interp;
+using namespace DataUtilities;
 
 TEST_CASE("nearest neighbour quatrent classification (not a unit test) test", "[nearest_neighbour2d]")
 {

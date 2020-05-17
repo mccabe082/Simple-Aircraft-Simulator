@@ -1,7 +1,7 @@
-#include "interpolate/lookup_table_2d.h"
+#include "data.utilities/lookup_table_2d.h"
 #include "xml_lookup_table_2d_reading.h"
 
-namespace interp
+namespace DataUtilities
 {
 	std::unique_ptr<LookupTable2D> LookupTable2D::load(const std::string& filename)
 	{

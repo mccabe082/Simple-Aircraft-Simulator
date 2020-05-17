@@ -1,11 +1,11 @@
 #include "catch.hpp"
-#include <interpolate/lookup_table_2d.h>
+#include <data.utilities/lookup_table_2d.h>
 
-using namespace interp;
+using namespace DataUtilities;
 
 TEST_CASE("Simple bilinear interpolation tests", "[bilinear_interpolation]")
 {
-	std::unique_ptr<LookupTable2D> pTestTable = LookupTable2D::load("D:/simple-aircraft-simulator/src/interpolate_test/test2d.xml");
+	std::unique_ptr<LookupTable2D> pTestTable = LookupTable2D::load("D:/simple-aircraft-simulator/src/data.utilities.test/test2d.xml");
 	const auto& testTable = *pTestTable;
 
 	auto testFunc = [](double x, double y) {return x * (y + .3); };

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "interpolate/lookup_table_1d.h"
+#include "data.utilities/lookup_table_1d.h"
 #include <string>
 
-namespace interp
+namespace DataUtilities
 {
 	class LinearInterpolation : public LookupTable1D
 	{

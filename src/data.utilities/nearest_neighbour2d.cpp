@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <limits>
 
-namespace interp
+namespace DataUtilities
 {
 	double NNDataPoint2D::distance(const NNDataPoint2D& p1, const NNDataPoint2D& p2)
 	{

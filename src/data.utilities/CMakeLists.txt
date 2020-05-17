@@ -1,14 +1,14 @@
-add_library(interpolate STATIC)
+add_library(data.utilities STATIC)
 
-target_include_directories(interpolate
+target_include_directories(data.utilities
 PUBLIC
   ../../include
 )
 
-target_sources(interpolate
+target_sources(data.utilities
 PRIVATE
-  ../../include/interpolate/lookup_table_1d.h
-  ../../include/interpolate/lookup_table_2d.h
+  ../../include/data.utilities/lookup_table_1d.h
+  ../../include/data.utilities/lookup_table_2d.h
   lookup_table_1d.cpp
   lookup_table_2d.cpp
   bilinear_interpolation.cpp
@@ -23,12 +23,12 @@ PRIVATE
   nearest_neighbour2d.h
 )
 
-target_link_libraries(interpolate
+target_link_libraries(data.utilities
 PRIVATE
   ::RapidXML
 )
 
-target_compile_features(interpolate
+target_compile_features(data.utilities
 PRIVATE
   cxx_std_17
 )

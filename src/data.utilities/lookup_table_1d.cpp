@@ -1,13 +1,13 @@
-#include "interpolate/lookup_table_1d.h"
+#include "data.utilities/lookup_table_1d.h"
 #include "linear_interpolation.h"
 #include "xml_lookup_table_1d_reading.h"
 
 namespace
 {
-	const interp::LookupTable1D::DataPoint emptyPoint{ std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN() };
+	const DataUtilities::LookupTable1D::DataPoint emptyPoint{ std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN() };
 }
 
-namespace interp
+namespace DataUtilities
 {
 	std::unique_ptr<LookupTable1D> LookupTable1D::load(const std::string& filename)
 	{

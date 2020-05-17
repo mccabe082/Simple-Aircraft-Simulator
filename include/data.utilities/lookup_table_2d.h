@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 
-namespace interp
+namespace DataUtilities
 {
 	class Lookup2D
 	{

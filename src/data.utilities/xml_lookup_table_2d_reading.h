@@ -1,10 +1,10 @@
 #pragma once
-#include "interpolate/lookup_table_2d.h"
+#include "data.utilities/lookup_table_2d.h"
 #include <vector>
 #include <string>
 #include <memory>
 
-namespace interp
+namespace DataUtilities
 {
 	namespace XMLLookupReading
 	{

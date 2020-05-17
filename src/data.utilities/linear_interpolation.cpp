@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <tuple>
 
-using namespace interp;
+using namespace DataUtilities;
 
 namespace
 {
@@ -22,7 +22,7 @@ namespace
 	}
 }
 
-namespace interp
+namespace DataUtilities
 {
 
 	//LinearInterpolation LinearInterpolation::load(const std::string& filename)

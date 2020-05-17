@@ -1,2 +1,2 @@
-add_subdirectory(interpolate)
-add_subdirectory(interpolate_test)
+add_subdirectory(data.utilities)
+add_subdirectory(data.utilities.test)
